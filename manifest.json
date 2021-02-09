@@ -1,7 +1,7 @@
 {
     "manifest_version": 2, 
-    "name": "UPDATE: Name of your plugin",
-    "description": "UPDATE: Description of your plugin",
+    "name": "Cad Currency Converter",
+    "description": "UPDATE: Converts Currencies to Canadian Dollar.",
     "version": "1.0",
     "permissions": ["activeTab"],
     "content_scripts": [
@@ -14,7 +14,7 @@
      ],
     "action": {
         "default_icon": {
-            "32":"/images/icon.png"
+            "32":"./images/Logo.png"
         },
         "default_popup": "popup.html"
     },
