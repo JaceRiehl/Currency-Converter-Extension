@@ -1,7 +1,7 @@
 {
     "manifest_version": 2, 
     "name": "Cad Currency Converter",
-    "description": "UPDATE: Converts Currencies to Canadian Dollar.",
+    "description": "Converts Currencies to Canadian Dollar.",
     "version": "1.0",
     "permissions": ["activeTab"],
     "content_scripts": [
