@@ -4,21 +4,24 @@ $span = $('span')
 console.log("starting")
 // console.log($span)
 
-var regex = /([0-9]+)(\,)*(\.[0-9]{2}){0,1}/
+// var regex = /([0-9]+)(\,)*(\.[0-9]{2}){0,1}/
+// var regex = /([0-9]+)(\.[0-9]{2}){0,1}|(\,)*/
+// var regex = /([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|([0-9]+)(\.[0-9]{2}){0,1}/
+var regex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){0,1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|([0-9]+)(\.[0-9]{2}){0,1}/
 
 
 $span.text(function(index, elem) {
 	console.log($(this).text())
 	var test = $(this).text().match(regex)
 	if(test !== undefined  && test !== null && test.length !== 0) {
-		// console.log(test[0])
+		console.log(test[0])
 		// console.log(parseFloat(test) * 1.3)
 		// console.log($(this).text())
-		var test2 = $(this).text().replace(test[0], (parseInt(test) * 1.3).toFixed(2))
-		// console.log("break")
+		replacementValue = (parseInt(test[0].replace(",", "")) * 1.3).toFixed(2)
+		var test2 = $(this).text().replace(test[0], replacementValue)
 		console.log(test2)
 		// return test2
-		return $(this).text().replace(test[0], (parseInt(test) * 1.3).toFixed(2))
+		return $(this).text().replace(test[0], replacementValue)
 	}
 	
 	// return $(this).text().replace(regex, "")
