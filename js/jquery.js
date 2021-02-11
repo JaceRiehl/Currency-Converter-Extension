@@ -7,22 +7,30 @@ console.log("starting")
 // var regex = /([0-9]+)(\,)*(\.[0-9]{2}){0,1}/
 // var regex = /([0-9]+)(\.[0-9]{2}){0,1}|(\,)*/
 // var regex = /([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|([0-9]+)(\.[0-9]{2}){0,1}/
-var regex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){0,1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|([0-9]+)(\.[0-9]{2}){0,1}/
+// var regex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){0,1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|([0-9]+)(\.[0-9]{0,2}){0,1}/
+// var regex = /\$(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){0,1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|([0-9]+)(\.[0-9]{0,2}){0,1}/
+// var regex = /\$(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){0,1}|\$([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|\$([0-9]+)(\.[0-9]{0,2}){0,1}/
+var regex = /\$([0-9]+)(\.[0-9]{0,2}){0,1}/
 
 
-//must contact the react id
+
+
+// must contact the react id
 $span.text(function(index, elem) {
-	console.log($(this).text())
+	// console.log($(this).text())
 	var test = $(this).text().match(regex)
 	if(test !== undefined  && test !== null && test.length !== 0) {
+		console.log(test)
 		console.log($(this).text())
 		console.log(test[0])
-		// replacementValue = (parseInt(test[0].replace(",", "")) * 1.3).toFixed(2)
-		// return $(this).text().replace(test[0], replacementValue)
+		replacementValue = (parseInt(test[0].replace("$", "")) * 1.3).toFixed(2)
+		console.log(replacementValue)
+		return $(this).text().replace(test[0], "$"+replacementValue + " CAD")
 	}
 	
 })
-
+// console.log("Attribute:")
+// console.log($('span').attr("data-reactid", "32").text())
 
 
 
