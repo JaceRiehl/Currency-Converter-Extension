@@ -16,6 +16,13 @@ var regex = /\$([0-9]+)(\.[0-9]{0,2}){0,1}/
 
 
 // must contact the react id
+
+//new ideas: popup in exntension that lets you convert on the spot
+// attach click listeners and when a price is clicked then it will convert
+// use an alternative website
+// alternative plugin design
+
+
 $span.text(function(index, elem) {
 	// console.log($(this).text())
 	var test = $(this).text().match(regex)
