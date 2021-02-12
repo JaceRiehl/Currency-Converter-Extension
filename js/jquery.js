@@ -10,29 +10,33 @@ console.log("starting")
 // var regex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){0,1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|([0-9]+)(\.[0-9]{0,2}){0,1}/
 // var regex = /\$(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){0,1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|([0-9]+)(\.[0-9]{0,2}){0,1}/
 // var regex = /\$(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){0,1}|\$([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|\$([0-9]+)(\.[0-9]{0,2}){0,1}/
-var regex = /\$([0-9]+)(\.[0-9]{0,2}){0,1}/
+// var regex = /\$([0-9]+)(\.[0-9]{0,2}){0,1}/
+var regex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){1}|([0-9]+)(\.[0-9]{2}){1}/
 
 
 
 
 // must contact the react id
+// Solution: only contact numbers ending with a .00 , on yahoo finance this will only target prices. 
 
-//new ideas: popup in exntension that lets you convert on the spot
-// attach click listeners and when a price is clicked then it will convert
-// use an alternative website
-// alternative plugin design
+//TODO: dont change %'s 
+//TODO: work with numbers in ranges ect 75.3 - 79.5
+//TODO: Add event listeners for when the numbers change.
+//TODO: Fix it not grabbing all numbers from all spans.
+//TODO: Keep original Text and display it. 
+//TODO: Add something to show that it's CAD
+//TODO: Look for if it says USD 
 
 
 $span.text(function(index, elem) {
-	// console.log($(this).text())
 	var test = $(this).text().match(regex)
 	if(test !== undefined  && test !== null && test.length !== 0) {
-		console.log(test)
 		console.log($(this).text())
 		console.log(test[0])
-		replacementValue = (parseInt(test[0].replace("$", "")) * 1.3).toFixed(2)
+		replacementValue = (parseFloat(test[0].replace(",", "")) * 1.3).toFixed(2)
+		console.log("")
 		console.log(replacementValue)
-		return $(this).text().replace(test[0], "$"+replacementValue + " CAD")
+		return $(this).text().replace(test[0], replacementValue)
 	}
 	
 })
@@ -54,38 +58,3 @@ $span.text(function(index, elem) {
 
 
 
-
-
-// console.log(test[0])
-		// console.log(parseFloat(test) * 1.3)
-		// console.log($(this).text())
-
-// var test2 = $(this).text().replace(test[0], replacementValue)
-		// console.log(test2)
-		// return test2
-
-
-// $span.each(function(index, elem) {
-// 	console.log($(elem).text())
-// 	var test = $(elem).text()
-// 	// var testexp = test.replace(regex, 'hello')
-// 	test.replace("3,911.23", "HI THERE LOOK AT MEEEEEEEEEEEEEE")
-// 	console.log(test)
-// 	$(elem).text(test)
-// 	console.log($(elem).text())
-// })
-
-// for(i = 0; i < $span.length; i++) {
-// 	console.log($span[i].text())
-// }
-
-
-// var test = $span.text()
-
-// var regex = /([0-9]+)(\,)*(\.[0-9]{2}){0,1}/
-// var testexp = test.replace(regex, 'hello')
-
-// $body.text(testexp)
-// console.log(test)
-console.log("hello")
-// console.log(testexp)
