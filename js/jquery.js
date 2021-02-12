@@ -11,7 +11,7 @@ console.log("starting")
 // var regex = /\$(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){0,1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|([0-9]+)(\.[0-9]{0,2}){0,1}/
 // var regex = /\$(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){0,1}|\$([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|\$([0-9]+)(\.[0-9]{0,2}){0,1}/
 // var regex = /\$([0-9]+)(\.[0-9]{0,2}){0,1}/
-var regex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){1}|([0-9]+)(\.[0-9]{2}){1}/
+var regex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){1}|([0-9]+)(\.[0-9]{2}){1}[^\%]/
 var usdRegex = /Currency in USD/
 
 
@@ -19,7 +19,7 @@ var usdRegex = /Currency in USD/
 // must contact the react id
 // Solution: only contact numbers ending with a .00 , on yahoo finance this will only target prices. 
 
-//TODO: Add something to show that it's CAD
+//TODO: Add something to show that it's CAD - DONE
 //TODO: Look for if it says USD  - DONE
 //TODO: dont change %'s 
 //TODO: work with numbers in ranges ect 75.3 - 79.5
@@ -34,7 +34,6 @@ $span.text(function(index, elem) {
 	if(usd !== undefined && usd !== null && usd.length !== 0) {
 		pageIsUSD = true
 	}
-	
 })
 
 
