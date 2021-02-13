@@ -16,7 +16,6 @@ var regex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){1}|([0-9]+)(\,
 var cadUSRegex = /[^\+]*0(\.[0-9]{4}){1}/
 var rangeRegex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2,3}){1}|([0-9]+)(\.[0-9]{2,3}){1}[^\%]/
 var usdRegex = /Currency in USD/
-// var usdToCadConv = 1.3
 
 
 // must contact the react id
@@ -43,17 +42,7 @@ chrome.storage.sync.get(['key'], function(result) {
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
-
-    console.log("Checked value: " + request.checked)
     checked = request.checked
-    
-    if (request.greeting == "hello")
-      sendResponse({farewell: "goodbye"});
-
-  console.log("Checked been in here: " + checked.toString())
   }
 );
 
