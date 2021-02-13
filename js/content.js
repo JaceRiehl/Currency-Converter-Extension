@@ -1,4 +1,4 @@
-console.log("extension is running!")
+// console.log("extension is running!")
 
 // TRY: updating the text content of an element or set of elements on one or more pages
 
