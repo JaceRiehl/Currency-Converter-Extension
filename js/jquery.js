@@ -32,7 +32,7 @@ var usdRegex = /Currency in USD/
 //TODO: create a popup for turning on and off the plugin - DONE
 //TODO: Make the extension only work under Yahoo Finance - DONE
 //TODO: Add event listeners for when the numbers change.
-//TODO: Add event listeners for when the user clicks on a new page.
+//TODO: Add event listeners for when the user clicks on a new page. - DONE
 //TODO: Update graphics on button
 //TODO: work with numbers in ranges ect 75.3 - 79.5 - Minor bug
 
@@ -121,7 +121,6 @@ runCode()
 function checkIfUSD(){
 	var usdRegex = /Currency in USD/
 	var $span = $('span')
-	var $td = $('td')
 	var pageIsUSD = false
 		$span.text(function(index, elem) {
 			var usd = $(this).text().match(usdRegex)

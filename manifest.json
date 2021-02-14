@@ -1,7 +1,7 @@
 {
     "manifest_version": 2, 
-    "name": "Cad Currency Converter",
-    "description": "Converts Currencies to Canadian Dollar.",
+    "name": "Cad $ Converter",
+    "description": "Converts USD to Canadian Dollar on yahoo finance US stocks.",
     "version": "1.0",
     "permissions": ["activeTab", "storage","webNavigation","tabs"],
     "content_scripts": [

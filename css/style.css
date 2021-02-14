@@ -1,4 +1,6 @@
 /* CSS HERE */
+
+/*Switch code from https://www.w3schools.com/howto/howto_css_switch.asp*/
 .switch {
   position: relative;
   display: inline-block;
@@ -58,4 +60,19 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+/*End of slider code*/
 
+* {
+  font-family: cursive;
+}
+
+body {
+  width: 150px;
+  display: inline-block;
+  text-align: center;
+}
+
+html {
+  background-color: #c2fffb;
+  border: 3px solid black;
+}
