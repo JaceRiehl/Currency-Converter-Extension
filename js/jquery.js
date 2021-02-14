@@ -67,12 +67,12 @@ const sleep = (milliseconds) => {
 
 function runCode() {
 
-	var regex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2,3}){1}|([0-9]+)(\.[0-9]{2,3}){1}[^\%| CAD]/
-	var cadUSRegex = /[^\+]*0(\.[0-9]{4}){1}/
-	var rangeRegex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2,3}){1}|([0-9]+)(\.[0-9]{2,3}){1}[^\%]/
-	var usdRegex = /Currency in USD/
-	var $span = $('span')
-	var $td = $('td')
+	// var regex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2,3}){1}|([0-9]+)(\.[0-9]{2,3}){1}[^\%]/
+	// var cadUSRegex = /[^\+]*0(\.[0-9]{4}){1}/
+	// var rangeRegex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2,3}){1}|([0-9]+)(\.[0-9]{2,3}){1}[^\%]/
+	// var usdRegex = /Currency in USD/
+	// var $span = $('span')
+	// var $td = $('td')
 
 
 	sleep(500).then(() => {
@@ -85,13 +85,8 @@ function runCode() {
 			console.log("cad-us: " + cadToUSConv.slice(0,6))
 
 			// Determines if the yahoo finance page is in USD
-			var pageIsUSD = false
-			$span.text(function(index, elem) {
-				var usd = $(this).text().match(usdRegex)
-				if(usd !== undefined && usd !== null && usd.length !== 0) {
-					pageIsUSD = true
-				}
-			})
+			var pageIsUSD = checkIfUSD()
+
 			console.log("pageisusd: " + pageIsUSD)
 			if(pageIsUSD == true) {
 
@@ -107,7 +102,7 @@ function runCode() {
 						var replacementValue = (parseFloat(test[0].replace(",", "")) / cadToUSConv.slice(0,6)).toFixed(2)
 						console.log("")
 						console.log(replacementValue)
-						return $(this).text().replace(test[0], replacementValue + "CAD")
+						return $(this).text().replace(test[0], replacementValue + "CAD ")
 					}
 					
 				})
@@ -122,16 +117,34 @@ function runCode() {
 	
 runCode()
 
+
+function checkIfUSD(){
+	var usdRegex = /Currency in USD/
+	var $span = $('span')
+	var $td = $('td')
+	var pageIsUSD = false
+		$span.text(function(index, elem) {
+			var usd = $(this).text().match(usdRegex)
+			if(usd !== undefined && usd !== null && usd.length !== 0) {
+				pageIsUSD = true
+			}
+		})
+		console.log("page IS USD: " + pageIsUSD)
+		return pageIsUSD
+}
+
+
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if(request.reRun){
-    	// location.reload();
-    	runCode()
-    	console.log("ran code##############")
-    	chrome.storage.sync.get(['key'], function(result) {
-  		checked = result.key
-  		console.log("Checked in message here: " + checked)
-		});
+    		if(checkIfUSD())
+    	 location.reload();
+    // 	runCode()
+    // 	console.log("ran code##############")
+    // 	chrome.storage.sync.get(['key'], function(result) {
+  		// checked = result.key
+  		// console.log("Checked in message here: " + checked)
+		// });
 
     }
   }
