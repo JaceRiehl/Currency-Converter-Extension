@@ -8,7 +8,7 @@
         {
             "matches": ["https://ca.finance.yahoo.com/*"],
             "allFrames": true,
-            "js": ["/js/jquery.js", "/js/content.js"],
+            "js": ["/js/jquery.js"],
             "css": ["/css/style.css"]
        }
      ],
