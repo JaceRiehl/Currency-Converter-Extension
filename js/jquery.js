@@ -6,35 +6,12 @@
 
 $span = $('span')
 $td = $('td')
-console.log("starting")
-// console.log($span)
 
-// var regex = /([0-9]+)(\,)*(\.[0-9]{2}){0,1}/
-// var regex = /([0-9]+)(\.[0-9]{2}){0,1}|(\,)*/
-// var regex = /([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|([0-9]+)(\.[0-9]{2}){0,1}/
-// var regex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){0,1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|([0-9]+)(\.[0-9]{0,2}){0,1}/
-// var regex = /\$(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){0,1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|([0-9]+)(\.[0-9]{0,2}){0,1}/
-// var regex = /\$(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){0,1}|\$([0-9]+)(\,)*([0-9]+)(\.[0-9]{2}){0,1}|\$([0-9]+)(\.[0-9]{0,2}){0,1}/
-// var regex = /\$([0-9]+)(\.[0-9]{0,2}){0,1}/
 var regex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2,3}){1}|([0-9]+)(\.[0-9]{2,3}){1}[^\%]/
 var cadUSRegex = /[^\+]*0(\.[0-9]{4}){1}/
 var rangeRegex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2,3}){1}|([0-9]+)(\.[0-9]{2,3}){1}[^\%]/
 var usdRegex = /Currency in USD/
 
-
-// must contact the react id
-// Solution: only contact numbers ending with a .00 , on yahoo finance this will only target prices. 
-
-//TODO: Add something to show that it's CAD - DONE
-//TODO: Look for if it says USD  - DONE
-//TODO: dont change %'s - DONE
-//TODO: grab the USD/CAD conversion from Yahoo finance  - DONE
-//TODO: create a popup for turning on and off the plugin - DONE
-//TODO: Make the extension only work under Yahoo Finance - DONE
-//TODO: Add event listeners for when the numbers change.
-//TODO: Add event listeners for when the user clicks on a new page. - DONE
-//TODO: Update graphics on button
-//TODO: work with numbers in ranges ect 75.3 - 79.5 - Minor bug
 
 
 var checked = false;
@@ -42,7 +19,6 @@ var checked = false;
 
 chrome.storage.sync.get(['key'], function(result) {
   checked = result.key
-  console.log("Checked here: " + checked)
 });
 
 
@@ -53,12 +29,8 @@ chrome.runtime.onMessage.addListener(
 );
 
 
-
-
-console.log("Checked out : " + checked.toString())
-
 	
-	//Code from: https://flaviocopes.com/javascript-sleep/
+//Code from: https://flaviocopes.com/javascript-sleep/
 const sleep = (milliseconds) => {
 	 return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
@@ -66,32 +38,14 @@ const sleep = (milliseconds) => {
 
 
 function runCode() {
-
-	// var regex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2,3}){1}|([0-9]+)(\.[0-9]{2,3}){1}[^\%]/
-	// var cadUSRegex = /[^\+]*0(\.[0-9]{4}){1}/
-	// var rangeRegex = /(([0-9]+)(\,)+([0-9]{3})(\,)+([0-9]{3}))(\.[0-9]{2}){1}|([0-9]+)(\,)*([0-9]+)(\.[0-9]{2,3}){1}|([0-9]+)(\.[0-9]{2,3}){1}[^\%]/
-	// var usdRegex = /Currency in USD/
-	// var $span = $('span')
-	// var $td = $('td')
-
-
 	sleep(500).then(() => {
-		console.log("Running runCode: " + checked)
-
-			if(checked) {
-			console.log("Checked in : " + checked.toString())	
+			if(checked) {	
 			var cadToUSConv = $('#marketsummary-itm-3').find('span').text() 
-
-			console.log("cad-us: " + cadToUSConv.slice(0,6))
 
 			// Determines if the yahoo finance page is in USD
 			var pageIsUSD = checkIfUSD()
 
-			console.log("pageisusd: " + pageIsUSD)
 			if(pageIsUSD == true) {
-
-				
-
 				if(pageIsUSD == true) {
 				$span.text(function(index, elem) {
 					var test = $(this).text().match(regex)
@@ -138,140 +92,6 @@ chrome.runtime.onMessage.addListener(
     if(request.reRun){
     		if(checkIfUSD())
     	 location.reload();
-    // 	runCode()
-    // 	console.log("ran code##############")
-    // 	chrome.storage.sync.get(['key'], function(result) {
-  		// checked = result.key
-  		// console.log("Checked in message here: " + checked)
-		// });
-
     }
   }
 );
-
-
-
-
-
-	//Searches all spans searching for the regex within span to see if it should convert that number, and if the regex matches then it uses 
-			//the conversion amount to convert the price.
-			// $td.text(function(index, elem) {
-			// 	var test = $(this).text().matchAll(regex)
-			// 	if(test !== undefined  && test !== null && test.length !== 0 && pageIsUSD) {
-			// 		var temp = test[0]
-			// 		console.log($(this).text())
-			// 		console.log(test[0])
-			// 		var replacementValue = (parseFloat(test[0].replace(",", "")) * usdToCadConv).toFixed(2)
-			// 		console.log("")
-			// 		console.log(replacementValue)
-			// 		return $(this).text().replace(test[0], replacementValue + " CAD")
-			// 	}
-				
-			// })
-
-
-
-
-// // Determines if the yahoo finance page is in USD
-// var pageIsUSD = false
-// $span.text(function(index, elem) {
-// 	var usd = $(this).text().match(usdRegex)
-// 	if(usd !== undefined && usd !== null && usd.length !== 0) {
-// 		pageIsUSD = true
-// 	}
-// })
-
-// if(pageIsUSD == true) {
-
-
-
-// 	$span.text(function(index, elem) {
-// 		var test = $(this).text().match(regex)
-// 		if(test !== undefined  && test !== null && test.length !== 0) {
-// 			var temp = test[0]
-// 			console.log($(this).text())
-// 			console.log(test[0])
-// 			var replacementValue = (parseFloat(test[0].replace(",", "")) * usdToCadConv).toFixed(2)
-// 			console.log("")
-// 			console.log(replacementValue)
-// 			return $(this).text().replace(test[0], replacementValue + " CAD")
-// 		}
-		
-// 	})
-
-// 	//Searches all spans searching for the regex within span to see if it should convert that number, and if the regex matches then it uses 
-// 	//the conversion amount to convert the price.
-// 	// $td.text(function(index, elem) {
-// 	// 	var test = $(this).text().matchAll(regex)
-// 	// 	if(test !== undefined  && test !== null && test.length !== 0 && pageIsUSD) {
-// 	// 		var temp = test[0]
-// 	// 		console.log($(this).text())
-// 	// 		console.log(test[0])
-// 	// 		var replacementValue = (parseFloat(test[0].replace(",", "")) * usdToCadConv).toFixed(2)
-// 	// 		console.log("")
-// 	// 		console.log(replacementValue)
-// 	// 		return $(this).text().replace(test[0], replacementValue + " CAD")
-// 	// 	}
-		
-// 	// })
-
-
-// }
-
-// var cadus = $('#marketsummary-itm-2').find('span').text()
-// console.log("cad-us: " + cadus)
-
-
-
-//Searches all spans searching for the regex within span to see if it should convert that number, and if the regex matches then it uses 
-//the conversion amount to convert the price.
-// $span.text(function(index, elem) {
-// 	var test = $(this).text().match(regex)
-// 	if(test !== undefined  && test !== null && test.length !== 0) {
-// 		var temp = test[0]
-// 		console.log($(this).text())
-// 		console.log(test[0])
-// 		var replacementValue = (parseFloat(test[0].replace(",", "")) * usdToCadConv).toFixed(2)
-// 		console.log("")
-// 		console.log(replacementValue)
-// 		return $(this).text().replace(test[0], replacementValue + " CAD")
-// 	}
-	
-// })
-
-//Searches all spans searching for the regex within span to see if it should convert that number, and if the regex matches then it uses 
-//the conversion amount to convert the price.
-// $td.text(function(index, elem) {
-// 	var test = $(this).text().matchAll(regex)
-// 	if(test !== undefined  && test !== null && test.length !== 0 && pageIsUSD) {
-// 		var temp = test[0]
-// 		console.log($(this).text())
-// 		console.log(test[0])
-// 		var replacementValue = (parseFloat(test[0].replace(",", "")) * usdToCadConv).toFixed(2)
-// 		console.log("")
-// 		console.log(replacementValue)
-// 		return $(this).text().replace(test[0], replacementValue + " CAD")
-// 	}
-	
-// })
-
-
-
-// console.log("Attribute:")
-// console.log($('span').attr("data-reactid", "32").text())
-
-
-
-
-// $span.text(function(index, elem) {
-// 	console.log($(this).text())
-// 	var test = $(this).text().match(regex)
-// 	if(test !== undefined  && test !== null && test.length !== 0) {
-// 		replacementValue = (parseInt(test[0].replace(",", "")) * 1.3).toFixed(2)
-// 		return $(this).text().replace(test[0], replacementValue)
-// 	}
-	
-// })
-
-
-

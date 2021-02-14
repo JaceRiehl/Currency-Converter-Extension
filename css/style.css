@@ -62,17 +62,16 @@ input:checked + .slider:before {
 }
 /*End of slider code*/
 
-* {
-  font-family: cursive;
-}
 
-body {
+
+body.popupBody {
   width: 150px;
   display: inline-block;
   text-align: center;
 }
 
-html {
+html.popupHTML {
   background-color: #c2fffb;
   border: 3px solid black;
+  font-family: cursive;
 }
