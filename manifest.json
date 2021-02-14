@@ -3,7 +3,7 @@
     "name": "Cad Currency Converter",
     "description": "Converts Currencies to Canadian Dollar.",
     "version": "1.0",
-    "permissions": ["activeTab"],
+    "permissions": ["activeTab", "storage","webNavigation","tabs"],
     "content_scripts": [
         {
             "matches": ["https://ca.finance.yahoo.com/*"],
@@ -22,7 +22,8 @@
         "images/*.jpg",
         "images/*.png" 
      ],
-     "permissions": [
-    "storage"
-  ] 
+  "background": {
+    "scripts": ["js/bg.js"],
+    "persistant": false
+  }
 }
