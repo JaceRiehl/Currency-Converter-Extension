@@ -3,19 +3,13 @@
 var $onOff = $('#onOff')
 
 chrome.storage.sync.get(['key'], function(result) {
-  console.log('Value currently is ' + result.key);
   $onOff.prop("checked", result.key)
-  console.log($onOff.is(":checked"))
-
 });
-
-console.log("ON OFF: " + $onOff.val().toString())
 
 $onOff.on('click', () => {
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
   		chrome.tabs.sendMessage(tabs[0].id, {checked: $onOff.prop("checked")});
   		chrome.storage.sync.set({key: $onOff.is(":checked")}, function() {
-		  console.log('Value is set to ' + $onOff.is(":checked"));
 		});
 	});
 })
